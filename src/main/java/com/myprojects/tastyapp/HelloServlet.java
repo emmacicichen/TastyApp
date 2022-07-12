@@ -1,5 +1,7 @@
 package com.myprojects.tastyapp;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.myprojects.tastyapp.entity.Customer;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
@@ -27,14 +29,22 @@ public class HelloServlet extends HttpServlet {
 
         response.setContentType("application/json");
 
-        JSONObject customer = new JSONObject();
+//        JSONObject customer = new JSONObject();
+//
+//        customer.put("email", "emma@gmail.com");
+//        customer.put("first_name", "Emma");
+//        customer.put("last_name", "Chen");
+//        customer.put("age", 18);
+        ObjectMapper mapper = new ObjectMapper();
 
-        customer.put("email", "emma@gmail.com");
-        customer.put("first_name", "Emma");
-        customer.put("last_name", "Chen");
-        customer.put("age", 18);
+        Customer customer = new Customer();
+        customer.setEmail("emma@gmail.com");
+        customer.setPassword("123456");
+        customer.setFirstName("emma");
+        customer.setLastName("chen");
+        customer.setEnable(true);
 
-        response.getWriter().print(customer);
+        response.getWriter().print(mapper.writeValueAsString(customer));
     }
 
     public void destroy() {
