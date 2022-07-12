@@ -1,5 +1,6 @@
 package com.myprojects.tastyapp;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -37,5 +38,25 @@ public class HelloServlet extends HttpServlet {
     }
 
     public void destroy() {
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //read customer info from request body
+        JSONObject jsonRequest = new JSONObject(IOUtils.toString(request.getReader()));
+        String email = jsonRequest.getString("email");
+        String firstName = jsonRequest.getString("firstName");
+        String lastName = jsonRequest.getString("lastName");
+        int age = jsonRequest.getInt("age");
+        //print customer's info
+        System.out.println("Email is:" + email);
+        System.out.println("First name is: " + firstName);
+        System.out.println("Last name is: " + lastName);
+        System.out.println("Age is: " + age);
+
+        //return status = ok as response body to the client
+        response.setContentType("application/json");
+        JSONObject jsonResponse = new JSONObject();
+        jsonResponse.put("status", "ok");
+        response.getWriter().print(jsonResponse);
     }
 }
