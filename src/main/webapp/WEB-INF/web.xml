@@ -14,6 +14,7 @@
         </param-value>
     </context-param>
 
+<!--    ContextLoaderListener creates ApplicationContext, which is the IoC container-->
     <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener
