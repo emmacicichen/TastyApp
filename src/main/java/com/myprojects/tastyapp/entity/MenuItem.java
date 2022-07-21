@@ -1,7 +1,10 @@
 package com.myprojects.tastyapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -16,6 +19,11 @@ public class MenuItem implements Serializable {
     private double price;
     private String description;
     private String imageUrl;
+
+    //define foreign key
+    @ManyToOne
+    @JsonIgnore
+    private Restaurant restaurant;
 
     public int getId() {
         return id;
@@ -59,6 +67,15 @@ public class MenuItem implements Serializable {
 
     public MenuItem setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public MenuItem setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
         return this;
     }
 }

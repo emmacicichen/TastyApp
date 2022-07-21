@@ -1,5 +1,7 @@
 package com.myprojects.tastyapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,6 +15,13 @@ public class OrderItem implements Serializable {
     private int id;
     private int quantity;
     private double price;
+
+    @ManyToOne
+    private MenuItem menuItem;
+
+    @ManyToOne
+    @JsonIgnore//when return a Cart obj, don't include this cart field
+    private Cart cart;
 
     public int getId() {
         return id;
@@ -38,6 +47,24 @@ public class OrderItem implements Serializable {
 
     public OrderItem setPrice(double price) {
         this.price = price;
+        return this;
+    }
+
+    public MenuItem getMenuItem() {
+        return menuItem;
+    }
+
+    public OrderItem setMenuItem(MenuItem menuItem) {
+        this.menuItem = menuItem;
+        return this;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public OrderItem setCart(Cart cart) {
+        this.cart = cart;
         return this;
     }
 }

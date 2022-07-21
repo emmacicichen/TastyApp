@@ -1,9 +1,8 @@
 package com.myprojects.tastyapp.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="restaurants")
@@ -17,6 +16,10 @@ public class Restaurant implements Serializable {
     private String phone;
     private String imageUrl;
 
+    //add mappedBy at the "many" side, which owns the relationship
+    //restaurant table does not have a col called menuItemList, but menuItem tabel has a col called restaurant_id
+    @OneToMany(mappedBy="restaurant", cascade=CascadeType.ALL, fetch= FetchType.EAGER)
+    private List<MenuItem> menuItemList;
     public int getId() {
         return id;
     }
@@ -59,6 +62,15 @@ public class Restaurant implements Serializable {
 
     public Restaurant setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public List<MenuItem> getMenuItemList() {
+        return menuItemList;
+    }
+
+    public Restaurant setMenuItemList(List<MenuItem> menuItemList) {
+        this.menuItemList = menuItemList;
         return this;
     }
 }
