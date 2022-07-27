@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
-public class SignUpController {
+public class SignUpController{
     @Autowired
     private CustomerService customerService;
-    //@RequestMapping define RESTFUL API
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.CREATED)//enum,return 201 created
-    public void signUp(@RequestBody Customer customer) {//RequestBody converts http request body to java obj
 
+    @RequestMapping(value="/signup", method= RequestMethod.POST)
+    @ResponseStatus(value= HttpStatus.CREATED)
+    public void signUp(@RequestBody Customer customer){
+        customerService.signUp(customer);
     }
 }
