@@ -42,7 +42,7 @@ public class HelloServlet extends HttpServlet {
         customer.setPassword("123456");
         customer.setFirstName("emma");
         customer.setLastName("chen");
-        customer.setEnable(true);
+        customer.setEnabled(true);
 
         response.getWriter().print(mapper.writeValueAsString(customer));
     }

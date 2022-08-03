@@ -18,10 +18,11 @@ public class CustomerService {
      * 3. save customer to db
     * */
     public void signUp(Customer customer) {
+        System.out.println("this is service layer");
         Cart cart = new Cart();
         customer.setCart(cart);
 
-        customer.setEnable(true);
+        customer.setEnabled(true);
         customerDao.signUp(customer);
     }
 
